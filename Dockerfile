@@ -8,10 +8,6 @@ RUN docker-php-ext-configure zip --with-libzip \
 && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 RUN docker-php-ext-install pdo_pgsql zip
 
-COPY --from=composer /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
-# install Hirak Prestissimo globally to speed up download of Composer packages (parallelized prefetching)
-RUN set -eux; \
-    composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative; \
-	composer clear-cache
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
