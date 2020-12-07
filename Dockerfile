@@ -1,4 +1,4 @@
-FROM vixns/php-nginx:7.3-debian
+FROM vixns/php-nginx:7.4-debian
 
 COPY ./docker/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
