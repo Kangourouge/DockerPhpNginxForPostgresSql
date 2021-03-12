@@ -1,4 +1,5 @@
-FROM vixns/php-nginx:7.4-debian
+FROM composer:2.0.8 as composer
+FROM vixns/php-nginx:7.4-debian-nonroot
 
 WORKDIR /var/www
 
@@ -17,6 +18,6 @@ RUN chown -R www-data:www-data /var/www /var/lib/nginx /var/log/nginx;
 
 USER www-data
 
-COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
